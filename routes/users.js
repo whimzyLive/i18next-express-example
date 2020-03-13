@@ -8,7 +8,6 @@ router.get("/", function(req, res, next) {
 
 router.get("/:lng/hello", function(req, res, next) {
   var lng = req.language;
-  var lngs = req.languages;
 
   var drinks = [
     { name: "Bloody Mary", drunkness: 3 },
