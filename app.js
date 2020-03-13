@@ -5,14 +5,26 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var middleware = require("i18next-express-middleware");
 var i18next = require("i18next");
-
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+var enTranslations = require("./assets/en.json");
+var zhTranslations = require("./assets/zh.json");
 
 var app = express();
 
 i18next.use(middleware.LanguageDetector).init({
-  preload: ["en", "de", "it"]
+  detection: {
+    order: ["path", "querystring"],
+    lookupPath: "lng",
+    lookupFromPathIndex: 1
+  },
+  preload: ["en", "zh"],
+  fallbackLng: "en",
+  debug: true,
+  resources: {
+    en: enTranslations,
+    zh: zhTranslations
+  }
 });
 
 // view engine setup

@@ -6,7 +6,7 @@ router.get("/", function(req, res, next) {
   res.send("respond with a resource");
 });
 
-router.get("/hello", function(req, res, next) {
+router.get("/:lng/hello", function(req, res, next) {
   var lng = req.language;
   var lngs = req.languages;
 
@@ -19,6 +19,9 @@ router.get("/hello", function(req, res, next) {
     "Any code of your own that you haven't looked at for six or more months might as well have been written by someone else.";
 
   res.render("pages/hello", {
+    // using i18next from js
+    welcome: req.t("welcome"),
+    lang: lng,
     drinks: drinks,
     tagline: tagline
   });

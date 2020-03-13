@@ -14,7 +14,10 @@
         <h1>This is great</h1>
         <p>Welcome to templating using EJS</p>
         <p><%= tagline %></p>
-
+        <p>Current language is: <%=lang %></p>
+        <%# using in18next in template directly %>
+        <p><%= t('hello') %></p>
+        <p><%= welcome %></p>
         <h2>Available drinks:</h2>
         <ul>
           <% drinks.forEach(drink => { %>
