@@ -19,7 +19,7 @@ router.get("/:lng/hello", function(req, res, next) {
 
   res.render("pages/hello", {
     // using i18next from js
-    welcome: req.t("welcome"),
+    welcome: req.t("common:welcome"),
     lang: lng,
     drinks: drinks,
     tagline: tagline

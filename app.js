@@ -7,29 +7,29 @@ var middleware = require("i18next-express-middleware");
 var i18next = require("i18next");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-var enTranslations = require("./assets/en.json");
-var zhTranslations = require("./assets/zh.json");
+var commonEn = require("./locales/en/common.json");
+var commonRu = require("./locales/ru/common.json");
 
 var app = express();
 
 i18next.use(middleware.LanguageDetector).init({
-  detection: {
-    order: ["path", "querystring"],
-    lookupPath: "lng",
-    lookupFromPathIndex: 1
-  },
-  preload: ["en", "zh"],
+  preload: ["en", "ru"],
   fallbackLng: "en",
-  debug: true,
   resources: {
-    en: enTranslations,
-    zh: zhTranslations
-  }
+    en: {
+      common: commonEn
+    },
+    ru: {
+      common: commonRu
+    }
+  },
+  debug: false
 });
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+// missing keys; make sure the body is parsed (i.e. with [body-parser](https://github.com/expressjs/body-parser#bodyparserjsonoptions))
 
 app.use(
   middleware.handle(i18next, {
@@ -37,6 +37,7 @@ app.use(
     removeLngFromUrl: false
   })
 );
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
